@@ -1,4 +1,4 @@
-import { ADD_TO_CART } from "../actions/cart";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cart";
 import { add } from "react-native-reanimated";
 import CartItem from '../../models/cart-item';
 
@@ -28,10 +28,39 @@ export default (state = initialState, action) => {
                 }
             } else {
                 const newCartItem = new CartItem(1, productPrice, productTitle, productPrice);
-                return { 
-                    ...state, 
+                return {
+                    ...state,
                     items: { ...state.items, [addedProduct.id]: newCartItem },
                     total: state.total + productPrice
+                }
+            }
+
+        case REMOVE_FROM_CART:
+            const removedProduct = state.items[action.pid];
+            const updatedCartTotal = (state.total - removedProduct.productPrice);
+            updatedCartTotal.toFixed(2);
+
+            if (removedProduct.quantity > 1) {
+                const updatedProductTotal = removedProduct.total - removedProduct.productPrice;
+                updatedProductTotal.toFixed(2);
+                const updatedCartItem = new CartItem(
+                    removedProduct.quantity - 1,
+                    removedProduct.productPrice,
+                    removedProduct.productTitle,
+                    updatedProductTotal
+                );
+                return {
+                    ...state,
+                    items: { ...state.items, [action.pid]: updatedCartItem },
+                    total: updatedCartTotal
+                }
+            } else {
+                const updatedCartItems = { ...state.items };
+                delete updatedCartItems[action.pid]; // Deletes the item with an id of action.pid from updatedCardItems
+                return {
+                    ...state,
+                    items: updatedCartItems,
+                    total: updatedCartTotal
                 }
             }
 
