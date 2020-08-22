@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOpacity: 0.3,
         shadowOffset: {width: 0, height: 3},
+        shadowRadius: 8,
         elevation: 5, // To have shadow effect on android
         borderRadius: 10, 
         backgroundColor: 'white',
@@ -70,11 +71,13 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 20,
-        marginVertical: 4
+        marginVertical: 4,
+        fontFamily: 'open-sans-bold'
     },
     price: {
         fontSize: 16,
-        color: '#aaa'
+        color: '#aaa',
+        fontFamily: 'open-sans'
     },
     actions: {
         flexDirection: 'row', // To have the buttons sit next to eachother in a row
