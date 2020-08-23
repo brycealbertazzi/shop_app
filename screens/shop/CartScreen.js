@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors'
 import { CartItem } from '../../components/shop/CartItem';
 import * as cartActions from '../../store/actions/cart';
+import * as orderActions from '../../store/actions/orders';
 
 export const CartScreen = props => {
     const cartTotal = useSelector(state => state.cart.total);
@@ -19,7 +20,7 @@ export const CartScreen = props => {
                 total: state.cart.items[key].total
             });
         }
-        return transformedCartItems.sort((a, b) => a.productId > b.productId ? 1 : -1);
+        return transformedCartItems.sort((a, b) => a.productId > b.productId ? 1 : -1); // Sort cart items from first added to last added
     });
 
     const dispatch = useDispatch();
@@ -28,7 +29,13 @@ export const CartScreen = props => {
         <View style={styles.screen}>
             <View style={styles.summary}>
                 <Text style={styles.summaryText}>Total: <Text style={styles.summaryAmount}>${cartTotal.toFixed(2)}</Text></Text>
-                <Button title="Order Now" color={Colors.secondary} disabled={cartItems.length <= 0}/>
+                <Button
+                 title="Order Now" 
+                 color={Colors.secondary} 
+                 disabled={cartItems.length <= 0}
+                 onPress={() => {
+                     dispatch(orderActions.addOrder(cartItems, cartTotal));
+                 }}/>
             </View>
             <View>
                 <Text>CART ITEMS</Text>
