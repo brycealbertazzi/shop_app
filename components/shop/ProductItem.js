@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity, Platform, TouchableNativeFeedback } from 'react-native';
-import Colors from '../../constants/Colors';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, TouchableNativeFeedback } from 'react-native';
 
 export const ProductItem = props => {
     let TouchableComponent = TouchableOpacity;
@@ -15,7 +14,7 @@ export const ProductItem = props => {
         // useForeground makes TouchableComponent respect the image and all elements in the view in the ripple effect
             <View style={styles.product}>
                 <View style={styles.touchable}>
-                    <TouchableComponent onPress={props.onViewDetail} useForeground> 
+                    <TouchableComponent onPress={props.onSelect} useForeground> 
                         <View>
                             <View style={styles.imageContainer}>
                                 <Image style={styles.image} source={{uri: props.image}}></Image>
@@ -26,8 +25,7 @@ export const ProductItem = props => {
                                 <Text style={styles.price}>${props.price.toFixed(2)}</Text> 
                             </View>
                             <View style={styles.actions}>
-                                <Button color={Colors.secondary} title="View Details" onPress={props.onViewDetail}></Button>
-                                <Button color={Colors.secondary} title="Cart" onPress={props.onAddToCart}></Button>
+                                {props.children}
                             </View>
                         </View>
                     </TouchableComponent>

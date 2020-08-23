@@ -2,6 +2,7 @@ import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cart";
 import { add } from "react-native-reanimated";
 import CartItem from '../../models/cart-item';
 import { ADD_ORDER } from "../actions/orders";
+import { DELETE_PRODUCT } from "../actions/products";
 
 const initialState = {
     items: {},
@@ -68,6 +69,20 @@ export default (state = initialState, action) => {
         case ADD_ORDER:
             // Clears the cart when adding an order
             return initialState
+
+        case DELETE_PRODUCT:
+            if (!state.items[action.pid]) {
+                return state;
+            }
+            const updatedItems = {...state.items};
+            const updatedTotal = state.total - state.items[action.pid].total
+            delete updatedItems[action.pid];
+
+            return {
+                ...state,
+                items: updatedItems,
+                total: updatedTotal
+            }
 
         default:
     }

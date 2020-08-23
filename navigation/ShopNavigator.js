@@ -9,8 +9,9 @@ import { ProductsOverviewScreen } from '../screens/shop/ProductsOverviewScreen';
 import { ProductDetailScreen } from '../screens/shop/ProductDetailScreen';
 import { CartScreen } from '../screens/shop/CartScreen';
 import { OrdersScreen } from '../screens/shop/OrdersScreen';
-import Order from '../models/order';
 import { Ionicons } from '@expo/vector-icons';
+import { UserProductsScreen } from '../screens/user/UserProductsScreen';
+import { EditProductsScreen } from '../screens/user/EditProductsScreen';
 
 const commonDefaultNavOptions = {
     headerStyle: {
@@ -61,12 +62,34 @@ const OrdersNavigator = createStackNavigator({
     defaultNavigationOptions: commonDefaultNavOptions
 });
 
+const AdminNavigator = createStackNavigator({
+    UserProducts: UserProductsScreen,
+    EditProduct: {
+        screen: EditProductsScreen
+    }
+}, 
+{
+    navigationOptions: { // Used if this Navigator is inside of another navigator
+        drawerIcon: drawerConfig => (
+            <Ionicons
+                name={Platform.OS === 'android' ? 'md-create': 'ios-create'}
+                size={23}
+                color={drawerConfig.tintColor}
+            ></Ionicons>
+        )
+    },
+    defaultNavigationOptions: commonDefaultNavOptions
+});
+
 const ShopNavigator = createDrawerNavigator({
     Products: {
         screen: ProductsNavigator
     },
     Orders: {
         screen: OrdersNavigator
+    },
+    Admin: {
+        screen: AdminNavigator
     }
 }, 
 {

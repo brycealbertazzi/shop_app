@@ -28,7 +28,7 @@ export const CartScreen = props => {
     return (
         <View style={styles.screen}>
             <View style={styles.summary}>
-                <Text style={styles.summaryText}>Total: <Text style={styles.summaryAmount}>${cartTotal.toFixed(2)}</Text></Text>
+                <Text style={styles.summaryText}>Total: <Text style={styles.summaryAmount}>${Math.round(cartTotal.toFixed(2) * 100) / 100}</Text></Text>
                 <Button
                  title="Order Now" 
                  color={Colors.secondary} 
