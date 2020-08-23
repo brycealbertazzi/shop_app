@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 16,
-        color: '#aaa',
+        color: '#999',
         fontFamily: 'open-sans'
     },
     actions: {

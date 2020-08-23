@@ -1,6 +1,7 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cart";
 import { add } from "react-native-reanimated";
 import CartItem from '../../models/cart-item';
+import { ADD_ORDER } from "../actions/orders";
 
 const initialState = {
     items: {},
@@ -63,6 +64,10 @@ export default (state = initialState, action) => {
                     total: updatedCartTotal
                 }
             }
+
+        case ADD_ORDER:
+            // Clears the cart when adding an order
+            return initialState
 
         default:
     }
