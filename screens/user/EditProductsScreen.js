@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { View, Text, TextInput, ScrollView, StyleSheet, Platform } from 'react-native';
+import { View, Text, TextInput, ScrollView, StyleSheet, Platform, Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -34,6 +34,7 @@ export const EditProductsScreen = props => {
                 +price
             ));
         }
+        props.navigation.goBack(); // Navigate back automatically after submitting a product
     }, [dispatch, prodId, title, description, imageUrl, price]);
 
     useEffect(() => {

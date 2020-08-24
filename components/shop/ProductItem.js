@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, TouchableNativeFeedback } from 'react-native';
+import { Card } from '../UI/Card';
 
 export const ProductItem = props => {
     let TouchableComponent = TouchableOpacity;
@@ -12,38 +13,30 @@ export const ProductItem = props => {
     return (
         // TouchableOpacity turns the entire view into a clickable object like a button
         // useForeground makes TouchableComponent respect the image and all elements in the view in the ripple effect
-            <View style={styles.product}>
-                <View style={styles.touchable}>
-                    <TouchableComponent onPress={props.onSelect} useForeground> 
-                        <View>
-                            <View style={styles.imageContainer}>
-                                <Image style={styles.image} source={{uri: props.image}}></Image>
-                            </View>
-                            <View style={styles.details}>
-                                <Text style={styles.title}>{props.title}</Text>
-                                {/* Always return price to 2 decimal places with toFixed(2) */}
-                                <Text style={styles.price}>${props.price.toFixed(2)}</Text> 
-                            </View>
-                            <View style={styles.actions}>
-                                {props.children}
-                            </View>
+        <Card style={styles.product}>
+            <View style={styles.touchable}>
+                <TouchableComponent onPress={props.onSelect} useForeground> 
+                    <View>
+                        <View style={styles.imageContainer}>
+                            <Image style={styles.image} source={{uri: props.image}}></Image>
                         </View>
-                    </TouchableComponent>
-                </View>
-                
+                        <View style={styles.details}>
+                            <Text style={styles.title}>{props.title}</Text>
+                            {/* Always return price to 2 decimal places with toFixed(2) */}
+                            <Text style={styles.price}>${props.price.toFixed(2)}</Text> 
+                        </View>
+                        <View style={styles.actions}>
+                            {props.children}
+                        </View>
+                    </View>
+                </TouchableComponent>
             </View>
+        </Card>
     )
 }
 
 const styles = StyleSheet.create({
     product: {
-        shadowColor: 'black',
-        shadowOpacity: 0.3,
-        shadowOffset: {width: 0, height: 3},
-        shadowRadius: 8,
-        elevation: 5, // To have shadow effect on android
-        borderRadius: 10, 
-        backgroundColor: 'white',
         height: 300,
         margin: 20
     },

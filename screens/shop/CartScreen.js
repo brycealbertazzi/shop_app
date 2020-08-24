@@ -6,6 +6,7 @@ import Colors from '../../constants/Colors'
 import { CartItem } from '../../components/shop/CartItem';
 import * as cartActions from '../../store/actions/cart';
 import * as orderActions from '../../store/actions/orders';
+import { Card } from '../../components/UI/Card';
 
 export const CartScreen = props => {
     const cartTotal = useSelector(state => state.cart.total);
@@ -27,7 +28,7 @@ export const CartScreen = props => {
 
     return (
         <View style={styles.screen}>
-            <View style={styles.summary}>
+            <Card style={styles.summary}>
                 <Text style={styles.summaryText}>Total: <Text style={styles.summaryAmount}>${Math.round(cartTotal.toFixed(2) * 100) / 100}</Text></Text>
                 <Button
                  title="Order Now" 
@@ -36,7 +37,7 @@ export const CartScreen = props => {
                  onPress={() => {
                      dispatch(orderActions.addOrder(cartItems, cartTotal));
                  }}/>
-            </View>
+            </Card>
             <View>
                 <Text>CART ITEMS</Text>
                 <FlatList
@@ -68,12 +69,6 @@ const styles = StyleSheet.create({
         margin: 20
     },
     summary: {
-        shadowColor: 'black',
-        shadowOpacity: 0.3,
-        shadowOffset: {width: 0, height: 3},
-        shadowRadius: 8,
-        elevation: 5, // To have shadow effect on android
-        backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
