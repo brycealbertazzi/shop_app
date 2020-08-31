@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     quantity: {
         fontFamily: 'open-sans',
-        color: '#aaa',
+        color: '#444',
         fontSize: 16
     },
     title: {
